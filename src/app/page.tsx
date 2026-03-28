@@ -52,16 +52,16 @@ export default async function Page() {
             {/* Financial grid */}
             <div className="grid grid-cols-2 gap-2 text-sm mb-3">
               <div>
-                <span className="font-medium">Listing:</span> ${deal.listing_price?.toLocaleString() ?? 'N/A'}
+                <span className="font-medium">Listing:</span> ${deal.listing_price !== undefined ? `$${new Intl.NumberFormat('en-US').format(deal.listing_price)}` : 'N/A'}
               </div>
               <div>
-                <span className="font-medium">ARV:</span> ${deal.arv?.toLocaleString() ?? 'N/A'}
+                <span className="font-medium">ARV:</span> ${deal.arv !== undefined ? `$${new Intl.NumberFormat('en-US').format(deal.arv)}` : 'N/A'}
               </div>
               <div>
-                <span className="font-medium">Rehab:</span> ${deal.estimated_rehab?.toLocaleString() ?? 'N/A'}
+                <span className="font-medium">Rehab:</span> ${deal.estimated_rehab !== undefined ? `$${new Intl.NumberFormat('en-US').format(deal.estimated_rehab)}` : 'N/A'}
               </div>
               <div>
-                <span className="font-medium text-green-600">MAO:</span> ${deal.max_allowable_offer?.toLocaleString() ?? 'N/A'}
+                <span className="font-medium text-green-600">MAO:</span> ${deal.max_allowable_offer !== undefined ? `$${new Intl.NumberFormat('en-US').format(deal.max_allowable_offer)}` : 'N/A'}
               </div>
             </div>
             {/* Keywords */}
