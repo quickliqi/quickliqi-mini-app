@@ -36,19 +36,44 @@ export default async function Page() {
       <h1 className="text-3xl font-bold mb-6">Current Deals</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.map((deal: any) => (
-          <div
-            key={deal.id}
-            className="border rounded-lg p-4 shadow hover:shadow-lg transition"
-          >
-            <h2 className="text-xl font-semibold mb-2">
-              {deal.title || `Deal #${deal.id}`}
-            </h2>
-            <p className="text-sm text-gray-600 mb-2">
-              {deal.description || 'No description'}
+          <div key={deal.id} className="relative border rounded-lg p-4 shadow hover:shadow-lg transition">
+            {/* Buyer badge */}
+            {deal.matched_buyer && (
+              <span className="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">
+                Buyer: {deal.matched_buyer}
+              </span>
+            )}
+            {/* Header */}
+            <h2 className="text-xl font-bold mb-2">{deal.address || `Deal #${deal.id}`}</h2>
+            {/* Sub‑header */}
+            <p className="text-sm text-gray-600 mb-3">
+              {deal.bedrooms || "-"} Bed • {deal.bathrooms || "-"} Bath • {deal.sqft || "-"} SqFt
             </p>
-            <pre className="bg-gray-50 p-2 rounded text-xs overflow-x-auto">
-{JSON.stringify(deal, null, 2)}
-            </pre>
+            {/* Financial grid */}
+            <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+              <div>
+                <span className="font-medium">Listing:</span> ${"{deal.listing_price?.toLocaleString()}"}
+              </div>
+              <div>
+                <span className="font-medium">ARV:</span> ${"{deal.arv?.toLocaleString()}"}
+              </div>
+              <div>
+                <span className="font-medium">Rehab:</span> ${"{deal.estimated_rehab?.toLocaleString()}"}
+              </div>
+              <div>
+                <span className="font-medium text-green-600">MAO:</span> ${"{deal.max_allowable_offer?.toLocaleString()}"}
+              </div>
+            </div>
+            {/* Keywords */}
+            {Array.isArray(deal.keywords) && (
+              <div className="flex flex-wrap gap-1 mt-2">
+                {deal.keywords.map((kw: string, i: number) => (
+                  <span key={i} className="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded-full">
+                    {kw}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
