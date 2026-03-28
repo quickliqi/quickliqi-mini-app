@@ -11,7 +11,7 @@ const fmt = (n: number | null | undefined) =>
   n !== undefined && n !== null ? `$${new Intl.NumberFormat('en-US').format(n)}` : 'N/A';
 
 export default async function Page() {
-  const { data, error } = await supabase.from('scrape_results').select('*');
+  const { data, error } = await supabase.from('scrape_results').select('*').order('created_at', { ascending: false }).not('address', 'is', null).limit(20);
 
   if (error) {
     return (
