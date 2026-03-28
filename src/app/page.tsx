@@ -44,7 +44,7 @@ export default async function Page() {
               </span>
             )}
             {/* Header */}
-            <h2 className="text-xl font-bold mb-2">{deal.address || `Deal #${deal.id}`}</h2>
+            <h2 className="text-xl font-bold mb-2">{deal.address || 'Unknown Address'}</h2>
             {/* Sub‑header */}
             <p className="text-sm text-gray-600 mb-3">
               {deal.bedrooms || "-"} Bed • {deal.bathrooms || "-"} Bath • {deal.sqft || "-"} SqFt
@@ -52,16 +52,16 @@ export default async function Page() {
             {/* Financial grid */}
             <div className="grid grid-cols-2 gap-2 text-sm mb-3">
               <div>
-                <span className="font-medium">Listing:</span> ${"{deal.listing_price?.toLocaleString()}"}
+                <span className="font-medium">Listing:</span> ${deal.listing_price?.toLocaleString() ?? 'N/A'}
               </div>
               <div>
-                <span className="font-medium">ARV:</span> ${"{deal.arv?.toLocaleString()}"}
+                <span className="font-medium">ARV:</span> ${deal.arv?.toLocaleString() ?? 'N/A'}
               </div>
               <div>
-                <span className="font-medium">Rehab:</span> ${"{deal.estimated_rehab?.toLocaleString()}"}
+                <span className="font-medium">Rehab:</span> ${deal.estimated_rehab?.toLocaleString() ?? 'N/A'}
               </div>
               <div>
-                <span className="font-medium text-green-600">MAO:</span> ${"{deal.max_allowable_offer?.toLocaleString()}"}
+                <span className="font-medium text-green-600">MAO:</span> ${deal.max_allowable_offer?.toLocaleString() ?? 'N/A'}
               </div>
             </div>
             {/* Keywords */}
