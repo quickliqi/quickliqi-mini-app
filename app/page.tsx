@@ -258,8 +258,6 @@ const demoBuyerMatches: BuyerMatch[] = [
 export default function Home() {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard')
   const [swarmStatus, setSwarmStatus] = useState<'idle' | 'running' | 'error'>('idle')
-  const [selectedCity, setSelectedCity] = useState<string>("Atlanta")
-  const [selectedState, setSelectedState] = useState<string>("GA")
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null)
   const [detailOpen, setDetailOpen] = useState(false)
   
@@ -396,7 +394,7 @@ export default function Home() {
       // Log swarm start
       await supabase.from('swarm_activity_log').insert({
         agent_name: 'SwarmController',
-        action_type: `Swarm started: ${selectedCity}, ${selectedState}`,
+        action_type: 'Swarm started: Orlando, FL',
         status: 'running',
       })
       
@@ -437,25 +435,6 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col pb-16">
-      {/* Swarm target inputs */}
-      <div style={{display:'flex',gap:'8px',padding:'8px 16px',background:'#111',borderBottom:'1px solid #333'}}>
-        <input
-          type="text"
-          value={selectedCity}
-          onChange={(e) => setSelectedCity(e.target.value)}
-          placeholder="City"
-          style={{flex:1,padding:'6px 10px',borderRadius:'6px',border:'1px solid #444',background:'#222',color:'#fff',fontSize:'14px'}}
-        />
-        <select
-          value={selectedState}
-          onChange={(e) => setSelectedState(e.target.value)}
-          style={{padding:'6px 10px',borderRadius:'6px',border:'1px solid #444',background:'#222',color:'#fff',fontSize:'14px'}}
-        >
-          {["AL","AR","AZ","CA","CO","FL","GA","IL","IN","KY","MI","MO","NC","NJ","NV","NY","OH","PA","SC","TN","TX","VA","WA"].map(s => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
-      </div>
       <Header swarmStatus={swarmStatus} onToggleSwarm={handleToggleSwarm} />
       
       <main className="flex flex-1 flex-col gap-4 py-4">
